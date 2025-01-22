@@ -3,4 +3,9 @@
     <string name="menu_favourite">Favoritos</string>
     <string name="menu_housing">Viviendas</string>
     <string name="contentDescription_icon">icon</string>
+    <string name="error_unknown">Error desconocido</string>
+    <string name="error_internet">Error, no hay conexión a internet</string>
+    <string name="error_server">Error en la conexión con el servidor</string>
+    <string name="empty_advertisement">No hay ningún anuncio para mostrar</string>
+    <string name="ok">ok</string>
 </resources>
