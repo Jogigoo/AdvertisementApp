@@ -1,6 +1,7 @@
 package com.jogigo.advertisementapp.data.api
 
 import com.jogigo.advertisementapp.data.models.Property
+import com.jogigo.advertisementapp.data.models.PropertyDetail
 import com.jogigo.advertisementapp.utils.Constants.Companion.ADVERTISEMENT_DETAIL
 import com.jogigo.advertisementapp.utils.Constants.Companion.ADVERTISEMENT_LIST
 import com.jogigo.advertisementapp.utils.Constants.Companion.API_URL
@@ -12,5 +13,5 @@ internal interface ApiService {
     fun getAdvertisements(): Call<List<Property>>
 
     @GET(API_URL + ADVERTISEMENT_DETAIL)
-    fun getAdvertisementDetail(): Call<List<Property>>
+    fun getAdvertisementDetail(): Call<PropertyDetail>
 }

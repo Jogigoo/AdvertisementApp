@@ -31,11 +31,9 @@ open class WSBase {
                 .build()
         }
 
-        fun checkStatus(context: Context, code: Int, listener: BasicListener?) {
-            if (code == 200 || code == 201) {
-                listener?.onOk()
-            } else {
-                listener?.onError(context.getString(R.string.error_unknown))
+        fun checkStatus(context: Context, code: Int) {
+            if (code != 200 && code != 201) {
+                throw Exception(context.getString(R.string.error_unknown))
             }
         }
 

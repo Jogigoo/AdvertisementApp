@@ -15,7 +15,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AdvertisementApp">
         <activity
-            android:name=".features.ui.screens.DetailActivity"
+            android:name=".features.ui.activities.DetailActivity"
             android:exported="false" />
         <activity
             android:name=".features.ui.screens.SplashActivity"

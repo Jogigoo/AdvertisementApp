@@ -2,95 +2,58 @@ package com.jogigo.advertisementapp.data.api
 
 import android.content.Context
 import com.jogigo.advertisementapp.R
-import com.jogigo.advertisementapp.data.listeners.BasicListener
-import com.jogigo.advertisementapp.utils.AppPreferences
+import com.jogigo.advertisementapp.data.models.Property
+import com.jogigo.advertisementapp.data.models.PropertyDetail
 import com.jogigo.advertisementapp.utils.Extensions.Companion.isNetworkConnected
-import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class APIAdvertisement : WSBase() {
     companion object {
-        fun getProperties(context: Context, listener: BasicListener) {
-            if (context.isNetworkConnected()) {
-                CoroutineScope(Dispatchers.IO).launch {
-                    runCatching {
-                        try {
-                            val call = getRetrofit(context)
-                                .create(ApiService::class.java)
-                                .getAdvertisements()
-                                .execute()
-                            val response = call.body()
-                            launch(Dispatchers.Main) {
-                                response?.let {
-                                    checkStatus(
-                                        context,
-                                        call.code(),
-                                        object : BasicListener {
-                                            override fun onOk() {
-                                                AppPreferences(context).properties =
-                                                    it.toMutableList()
-                                                listener.onOk()
-                                            }
+        suspend fun getProperties(context: Context): List<Property> {
+            if (!context.isNetworkConnected()) {
+                throw Exception(context.getString(R.string.error_internet))
+            }
 
-                                            override fun onError(error: String) {
-                                                listener.onError(error)
-                                            }
-                                        })
-                                } ?: run {
-                                    listener.onError(context.getString(R.string.error_server))
-                                }
-                            }
-                        } catch (e: Exception) {
-                            launch(Dispatchers.Main) {
-                                listener.onError(e.message.toString())
-                            }
-                        }
-                    }
+            return withContext(Dispatchers.IO) {
+                val call = getRetrofit(context)
+                    .create(ApiService::class.java)
+                    .getAdvertisements()
+                    .execute()
+
+                val response = call.body()
+                if (response != null) {
+                    checkStatus(context, call.code())
+                    response
+                } else {
+                    throw Exception(context.getString(R.string.error_server))
                 }
-            } else {
-                listener.onError(context.getString(R.string.error_internet))
             }
         }
 
-        fun getPropertyDetail(context: Context, listener: BasicListener) {
-            if (context.isNetworkConnected()) {
-                CoroutineScope(Dispatchers.IO).launch {
-                    runCatching {
-                        try {
-                            val call = getRetrofit(context)
-                                .create(ApiService::class.java)
-                                .getAdvertisementDetail()
-                                .execute()
+        suspend fun getPropertyDetail(context: Context): PropertyDetail {
+            if (!context.isNetworkConnected()) {
+                throw Exception(context.getString(R.string.error_internet))
+            }
 
-                            val response = call.body()
-                            launch(Dispatchers.Main) {
-                                response?.let {
-                                    checkStatus(
-                                        context,
-                                        call.code(),
-                                        object : BasicListener {
-                                            override fun onOk() {
-                                                listener.onOk()
-                                            }
+            return withContext(Dispatchers.IO) {
+                try {
+                    val call = getRetrofit(context)
+                        .create(ApiService::class.java)
+                        .getAdvertisementDetail()
+                        .execute()
 
-                                            override fun onError(error: String) {
-                                                listener.onError(error)
-                                            }
-                                        })
-                                } ?: run {
-                                    listener.onError(context.getString(R.string.error_server))
-                                }
-                            }
-                        } catch (e: Exception) {
-                            launch(Dispatchers.Main) {
-                                listener.onError(context.getString(R.string.error_unknown))
-                            }
-                        }
+                    val response = call.body()
+
+                    if (response != null) {
+                        checkStatus(context, call.code())
+                        response
+                    } else {
+                        throw Exception(context.getString(R.string.error_server))
                     }
+                } catch (e: Exception) {
+                    throw Exception(context.getString(R.string.error_unknown))
                 }
-            } else {
-                listener.onError(context.getString(R.string.error_internet))
             }
         }
     }

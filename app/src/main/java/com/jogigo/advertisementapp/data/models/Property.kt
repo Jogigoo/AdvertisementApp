@@ -25,7 +25,9 @@ data class Property(
     @SerializedName("description") val description: String,
     @SerializedName("multimedia") val multimedia: Multimedia,
     @SerializedName("parkingSpace") val parkingSpace: ParkingSpace?,
-    @SerializedName("features") val features: Features
+    @SerializedName("features") val features: Features,
+    var favourite: Boolean = false,
+    var dateFavourite: String? = null
 )
 
 data class PriceInfo(
