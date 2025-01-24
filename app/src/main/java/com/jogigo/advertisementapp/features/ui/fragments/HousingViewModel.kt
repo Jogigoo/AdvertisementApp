@@ -47,8 +47,7 @@ class HousingViewModel : ViewModel() {
 
     fun loadProperties(context: Context) {
         val appPreferences = AppPreferences(context)
-        val currentTime = System.currentTimeMillis()
-        if (_properties.value.isNullOrEmpty()) {
+       if (_properties.value.isNullOrEmpty()) {
             _loading.value = true
             viewModelScope.launch {
                 try {
@@ -63,13 +62,11 @@ class HousingViewModel : ViewModel() {
                             property.favourite = true
                             property.dateFavourite = favouriteDate
                         } else {
-                            // La propiedad no es favorita
                             property.favourite = false
                             property.dateFavourite = ""
                         }
                     }
                     appPreferences.properties = propertyList.toMutableList()
-                    appPreferences.lastFetchTime = currentTime
                     _properties.value = propertyList
                     _error.value = null
                 } catch (e: Exception) {

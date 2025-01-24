@@ -58,8 +58,7 @@ class FavouriteFragment : Fragment() {
                         override fun onClick(property: Property) {
                             DetailActivity.open(requireContext())
                         }
-                    },
-                    AppPreferences(requireContext()),
+                    },favourites.toMutableMap()
                 )
 
                 binding.favourites.adapter = favouriteAdapter

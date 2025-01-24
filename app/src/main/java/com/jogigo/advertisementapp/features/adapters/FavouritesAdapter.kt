@@ -16,7 +16,6 @@ import com.bumptech.glide.Glide
 import com.jogigo.advertisementapp.R
 import com.jogigo.advertisementapp.data.models.Property
 import com.jogigo.advertisementapp.databinding.ItemPropertyFullBinding
-import com.jogigo.advertisementapp.utils.AppPreferences
 
 interface FavouriteListener {
     fun onClick(property: Property)
@@ -27,7 +26,7 @@ class FavouriteAdapter(
     private val favouriteIds: MutableSet<String>,
     private val allProperties: List<Property>,
     private val listener: FavouriteListener,
-    private val appPreferences: AppPreferences
+    private val favouriteDates: MutableMap<String, String>
 ) : RecyclerView.Adapter<FavouriteAdapter.FavouriteViewHolder>() {
 
     private val favouriteProperties: MutableList<Property>
@@ -72,8 +71,8 @@ class FavouriteAdapter(
             Glide.with(itemView.context)
                 .load(item.thumbnail)
                 .into(thumbnailImageView)
-            val favouriteDate = appPreferences.getFavouriteDate(item)
-            if (item.favourite &&  favouriteDate != null) {
+            val favouriteDate = favouriteDates[item.propertyCode]
+            if (favouriteDate != null) {
                 dataAdded.visibility = VISIBLE
                 dataAdded.text = favouriteDate
             } else {
