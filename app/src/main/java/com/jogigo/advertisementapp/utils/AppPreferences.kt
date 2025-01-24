@@ -7,18 +7,11 @@ import com.jogigo.advertisementapp.data.models.Property
 import com.jogigo.advertisementapp.utils.Constants.Companion.ADVERTISEMENTS
 import com.jogigo.advertisementapp.utils.Constants.Companion.APPLICATION_ID
 import com.jogigo.advertisementapp.utils.Constants.Companion.FAVOURITES
-import com.jogigo.advertisementapp.utils.Constants.Companion.LAST_FETCHED_TIME
 import com.jogigo.advertisementapp.utils.Extensions.Companion.getCurrentDateTime
 
 class AppPreferences(context: Context) : BasePreferences(
     context, APPLICATION_ID
 ) {
-
-    var lastFetchTime: Long
-        get() = prefs()[LAST_FETCHED_TIME, 0]
-        set(value) {
-            prefs()[LAST_FETCHED_TIME] = value
-        }
     var properties: MutableList<Property>
         set(value) = prefs().set(ADVERTISEMENTS, Gson().toJson(value))
         get() = Gson().fromJson(
@@ -55,5 +48,7 @@ class AppPreferences(context: Context) : BasePreferences(
         favourites.remove(property.propertyCode)
         this.favourites = favourites
     }
-
+    fun getFavouriteDate(property: Property): String? {
+        return this.favourites[property.propertyCode]
+    }
 }

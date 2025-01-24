@@ -16,7 +16,7 @@ class APIAdvertisement : WSBase() {
             }
 
             return withContext(Dispatchers.IO) {
-                val call = getRetrofit(context)
+                val call = getRetrofit()
                     .create(ApiService::class.java)
                     .getAdvertisements()
                     .execute()
@@ -38,7 +38,7 @@ class APIAdvertisement : WSBase() {
 
             return withContext(Dispatchers.IO) {
                 try {
-                    val call = getRetrofit(context)
+                    val call = getRetrofit()
                         .create(ApiService::class.java)
                         .getAdvertisementDetail()
                         .execute()

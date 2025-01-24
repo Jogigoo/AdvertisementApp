@@ -3,7 +3,7 @@ package com.jogigo.advertisementapp
 import android.content.Intent
 import android.net.Uri
 import androidx.test.ext.junit.rules.ActivityScenarioRule
-import com.jogigo.advertisementapp.features.ui.activities.DetailActivity
+import com.jogigo.advertisementapp.features.ui.screens.detail.DetailActivity
 import junit.framework.TestCase.assertEquals
 import junit.framework.TestCase.assertNotNull
 import junit.framework.TestCase.assertTrue

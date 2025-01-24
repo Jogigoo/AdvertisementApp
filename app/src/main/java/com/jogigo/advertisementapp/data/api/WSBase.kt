@@ -3,7 +3,6 @@ package com.jogigo.advertisementapp.data.api
 import android.content.Context
 
 import com.jogigo.advertisementapp.R
-import com.jogigo.advertisementapp.data.listeners.BasicListener
 import com.jogigo.advertisementapp.utils.Constants
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
@@ -13,7 +12,7 @@ import java.util.concurrent.TimeUnit
 open class WSBase {
 
     companion object {
-        fun getRetrofit(context: Context, token: String? = null): Retrofit {
+        fun getRetrofit(): Retrofit {
             return Retrofit.Builder()
                 .baseUrl(Constants.API_URL)
                 .client(

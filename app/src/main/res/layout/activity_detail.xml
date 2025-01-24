@@ -8,7 +8,6 @@
         android:layout_height="match_parent"
         android:padding="16dp">
 
-        <!-- Back Arrow -->
         <ImageView
             android:id="@+id/backArrow"
             android:layout_width="32dp"
@@ -19,7 +18,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <!-- Image Slider -->
         <androidx.viewpager2.widget.ViewPager2
             android:id="@+id/imageSlider"
             android:layout_width="0dp"
@@ -30,7 +28,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/backArrow" />
 
-        <!-- Page Indicator -->
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/sliderIndicator"
             android:layout_width="wrap_content"
@@ -42,7 +39,6 @@
             android:background="@android:color/transparent"
             app:tabIndicatorHeight="4dp" />
 
-        <!-- Property Details -->
         <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
             android:layout_height="0dp"
@@ -57,7 +53,6 @@
                 android:layout_height="wrap_content">
 
 
-                <!-- Description -->
                 <TextView
                     android:id="@+id/propertyDescription"
                     android:layout_width="0dp"
@@ -70,7 +65,7 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
-                <!-- Characteristics -->
+
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/propertyCharacteristics"
                     android:layout_width="0dp"
@@ -81,7 +76,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent" />
 
-                <!-- Price -->
+
                 <TextView
                     android:id="@+id/propertyPrice"
                     android:layout_width="0dp"
@@ -95,7 +90,6 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent" />
 
-                <!-- Action Button -->
                 <Button
                     android:id="@+id/contactButton"
                     android:layout_width="0dp"
@@ -121,7 +115,6 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.core.widget.NestedScrollView>
 
-        <!-- Loading Indicator -->
         <include
             android:id="@+id/loading"
             layout="@layout/activity_loading"

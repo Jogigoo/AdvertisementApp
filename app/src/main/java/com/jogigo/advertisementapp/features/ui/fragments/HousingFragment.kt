@@ -10,12 +10,11 @@ import androidx.databinding.DataBindingUtil
 import com.jogigo.advertisementapp.R
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
 import com.jogigo.advertisementapp.data.models.Property
 import com.jogigo.advertisementapp.databinding.FragmentHousingBinding
 import com.jogigo.advertisementapp.features.adapters.AdvertisementAdapter
 import com.jogigo.advertisementapp.features.adapters.PropertyListener
-import com.jogigo.advertisementapp.features.ui.activities.DetailActivity
+import com.jogigo.advertisementapp.features.ui.screens.detail.DetailActivity
 
 class HousingFragment : Fragment() {
     private lateinit var binding: FragmentHousingBinding

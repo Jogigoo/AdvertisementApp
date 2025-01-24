@@ -16,9 +16,7 @@ import com.bumptech.glide.Glide
 import com.jogigo.advertisementapp.R
 import com.jogigo.advertisementapp.data.models.Property
 import com.jogigo.advertisementapp.databinding.ItemPropertyFullBinding
-import java.text.SimpleDateFormat
-import java.util.Date
-import java.util.Locale
+import com.jogigo.advertisementapp.utils.AppPreferences
 
 interface FavouriteListener {
     fun onClick(property: Property)
@@ -28,7 +26,8 @@ class FavouriteAdapter(
     private val context: Context,
     private val favouriteIds: MutableSet<String>,
     private val allProperties: List<Property>,
-    private val listener: FavouriteListener
+    private val listener: FavouriteListener,
+    private val appPreferences: AppPreferences
 ) : RecyclerView.Adapter<FavouriteAdapter.FavouriteViewHolder>() {
 
     private val favouriteProperties: MutableList<Property>
@@ -73,9 +72,10 @@ class FavouriteAdapter(
             Glide.with(itemView.context)
                 .load(item.thumbnail)
                 .into(thumbnailImageView)
-            if (item.favourite && item.dateFavourite?.isNotEmpty() != false) {
+            val favouriteDate = appPreferences.getFavouriteDate(item)
+            if (item.favourite &&  favouriteDate != null) {
                 dataAdded.visibility = VISIBLE
-                dataAdded.text = item.dateFavourite
+                dataAdded.text = favouriteDate
             } else {
                 dataAdded.visibility = GONE
                 dataAdded.text = ""
@@ -85,64 +85,43 @@ class FavouriteAdapter(
 
             itemView.setOnClickListener { listener.onClick(item) }
 
-            // Sección de propiedades adicionales
-            // Aire acondicionado
             val airConditioningLayout =
                 itemView.findViewById<LinearLayout>(R.id.air_conditioning_layout)
-            itemView.findViewById<ImageView>(R.id.air_conditioning_icon)
-            val airConditioningLabel = itemView.findViewById<TextView>(R.id.air_conditioning_label)
-
             if (item.features.hasAirConditioning) {
                 airConditioningLayout.visibility = VISIBLE
-                airConditioningLabel.text = itemView.context.getString(R.string.txt_aire)
             } else {
                 airConditioningLayout.visibility = GONE
             }
 
-            // Piscina
-            val swimmingPoolLayout = itemView.findViewById<LinearLayout>(R.id.swimming_pool_layout)
-            itemView.findViewById<ImageView>(R.id.swimming_pool_icon)
-            val swimmingPoolLabel = itemView.findViewById<TextView>(R.id.swimming_pool_label)
 
+            val swimmingPoolLayout = itemView.findViewById<LinearLayout>(R.id.swimming_pool_layout)
             if (item.features.hasSwimmingPool == true) {
                 swimmingPoolLayout.visibility = VISIBLE
-                swimmingPoolLabel.text = itemView.context.getString(R.string.txt_piscina)
             } else {
                 swimmingPoolLayout.visibility = GONE
             }
 
-            // Terraza
-            val terraceLayout = itemView.findViewById<LinearLayout>(R.id.terrace_layout)
-            itemView.findViewById<ImageView>(R.id.terrace_icon)
-            val terraceLabel = itemView.findViewById<TextView>(R.id.terrace_label)
 
+            val terraceLayout = itemView.findViewById<LinearLayout>(R.id.terrace_layout)
             if (item.features.hasTerrace == true) {
                 terraceLayout.visibility = VISIBLE
-                terraceLabel.text = itemView.context.getString(R.string.txt_terraza)
+
             } else {
                 terraceLayout.visibility = GONE
             }
 
-            // Trastero
-            val boxRoomLayout = itemView.findViewById<LinearLayout>(R.id.box_room_layout)
-            itemView.findViewById<ImageView>(R.id.box_room_icon)
-            val boxRoomLabel = itemView.findViewById<TextView>(R.id.box_room_label)
 
+            val boxRoomLayout = itemView.findViewById<LinearLayout>(R.id.box_room_layout)
             if (item.features.hasBoxRoom) {
                 boxRoomLayout.visibility = VISIBLE
-                boxRoomLabel.text = itemView.context.getString(R.string.txt_trastero)
+
             } else {
                 boxRoomLayout.visibility = GONE
             }
 
-            // Jardín
             val gardenLayout = itemView.findViewById<LinearLayout>(R.id.garden_layout)
-            itemView.findViewById<ImageView>(R.id.garden_icon)
-            val gardenLabel = itemView.findViewById<TextView>(R.id.garden_label)
-
             if (item.features.hasGarden == true) {
                 gardenLayout.visibility = VISIBLE
-                gardenLabel.text = itemView.context.getString(R.string.txt_garden)
             } else {
                 gardenLayout.visibility = GONE
             }
@@ -164,8 +143,4 @@ class FavouriteAdapter(
         starImageView.setColorFilter(color)
     }
 
-    private fun getCurrentDateTime(): String {
-        val dateFormat = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault())
-        return dateFormat.format(Date())
-    }
 }

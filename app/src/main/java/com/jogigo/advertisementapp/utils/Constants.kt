@@ -11,6 +11,5 @@ class Constants {
         const val APPLICATION_ID = "com.jogigo.advertisementapp"
         const val ADVERTISEMENTS = "advertisements"
         const val FAVOURITES = "favourites"
-        const val LAST_FETCHED_TIME = "lastFetchedTime"
     }
 }

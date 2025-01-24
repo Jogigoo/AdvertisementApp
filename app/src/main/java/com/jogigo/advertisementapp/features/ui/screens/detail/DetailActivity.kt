@@ -1,4 +1,4 @@
-package com.jogigo.advertisementapp.features.ui.activities
+package com.jogigo.advertisementapp.features.ui.screens.detail
 
 import android.annotation.SuppressLint
 import android.content.Context
@@ -19,7 +19,6 @@ import com.jogigo.advertisementapp.data.models.toMap
 import com.jogigo.advertisementapp.databinding.ActivityDetailBinding
 import com.jogigo.advertisementapp.features.adapters.CharacteristicsAdapter
 import com.jogigo.advertisementapp.features.adapters.ImageSliderAdapter
-import com.jogigo.advertisementapp.features.ui.screens.DetailViewModel
 
 class DetailActivity : AppCompatActivity() {
 
@@ -88,7 +87,7 @@ class DetailActivity : AppCompatActivity() {
             }
         }
 
-        viewModel.getPropertyDetail(this)
+        viewModel.loadPropertyDetail(this)
     }
 
     private fun showErrorDialog(errorMessage: String) {

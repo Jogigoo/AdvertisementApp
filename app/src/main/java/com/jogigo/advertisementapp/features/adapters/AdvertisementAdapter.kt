@@ -40,7 +40,7 @@ class AdvertisementAdapter(
         )
 
     override fun onBindViewHolder(holder: AdvertisementViewHolder, position: Int) =
-        holder.bind(context,items[position], listener, position)
+        holder.bind(context, items[position], listener, position)
 
     override fun getItemCount(): Int = items.size
 
@@ -52,7 +52,7 @@ class AdvertisementAdapter(
             val starImageView = itemView.findViewById<ImageView>(R.id.star_icon)
             updateStarColor(starImageView, item.favourite)
             itemView.findViewById<TextView>(R.id.property_address).text = item.address
-            if(item.operation == "sale") {
+            if (item.operation == "sale") {
                 itemView.findViewById<TextView>(R.id.property_price).text =
                     context.getString(R.string.price_property, item.price)
             } else {
@@ -75,7 +75,6 @@ class AdvertisementAdapter(
                 dataAdded.text = ""
             }
 
-            // Manejo del icono de "favorito"
             starImageView.setOnClickListener {
                 item.favourite = !item.favourite
 
@@ -98,64 +97,56 @@ class AdvertisementAdapter(
 
             itemView.setOnClickListener { listener.onClick(item) }
 
-            // Sección de propiedades adicionales
-            // Aire acondicionado
             val airConditioningLayout =
                 itemView.findViewById<LinearLayout>(R.id.air_conditioning_layout)
-            itemView.findViewById<ImageView>(R.id.air_conditioning_icon)
-            val airConditioningLabel = itemView.findViewById<TextView>(R.id.air_conditioning_label)
+
+            itemView.findViewById<TextView>(R.id.air_conditioning_label)
 
             if (item.features.hasAirConditioning) {
                 airConditioningLayout.visibility = VISIBLE
-                airConditioningLabel.text = itemView.context.getString(R.string.txt_aire)
+
             } else {
                 airConditioningLayout.visibility = GONE
             }
 
-            // Piscina
+
             val swimmingPoolLayout = itemView.findViewById<LinearLayout>(R.id.swimming_pool_layout)
-            itemView.findViewById<ImageView>(R.id.swimming_pool_icon)
-            val swimmingPoolLabel = itemView.findViewById<TextView>(R.id.swimming_pool_label)
+
 
             if (item.features.hasSwimmingPool == true) {
                 swimmingPoolLayout.visibility = VISIBLE
-                swimmingPoolLabel.text = itemView.context.getString(R.string.txt_piscina)
+
             } else {
                 swimmingPoolLayout.visibility = GONE
             }
 
-            // Terraza
+
             val terraceLayout = itemView.findViewById<LinearLayout>(R.id.terrace_layout)
-            val terraceIcon = itemView.findViewById<ImageView>(R.id.terrace_icon)
-            val terraceLabel = itemView.findViewById<TextView>(R.id.terrace_label)
+            itemView.findViewById<ImageView>(R.id.terrace_icon)
+
 
             if (item.features.hasTerrace == true) {
                 terraceLayout.visibility = VISIBLE
-                terraceLabel.text = itemView.context.getString(R.string.txt_terraza)
             } else {
                 terraceLayout.visibility = GONE
             }
 
-            // Trastero
+
             val boxRoomLayout = itemView.findViewById<LinearLayout>(R.id.box_room_layout)
-            val boxRoomIcon = itemView.findViewById<ImageView>(R.id.box_room_icon)
-            val boxRoomLabel = itemView.findViewById<TextView>(R.id.box_room_label)
+
 
             if (item.features.hasBoxRoom) {
                 boxRoomLayout.visibility = VISIBLE
-                boxRoomLabel.text = itemView.context.getString(R.string.txt_trastero)
             } else {
                 boxRoomLayout.visibility = GONE
             }
 
-            // Jardín
+
             val gardenLayout = itemView.findViewById<LinearLayout>(R.id.garden_layout)
-            val gardenIcon = itemView.findViewById<ImageView>(R.id.garden_icon)
-            val gardenLabel = itemView.findViewById<TextView>(R.id.garden_label)
+
 
             if (item.features.hasGarden == true) {
                 gardenLayout.visibility = VISIBLE
-                gardenLabel.text = itemView.context.getString(R.string.txt_garden)
             } else {
                 gardenLayout.visibility = GONE
             }

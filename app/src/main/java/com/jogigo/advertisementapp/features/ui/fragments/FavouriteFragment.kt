@@ -15,7 +15,7 @@ import com.jogigo.advertisementapp.data.models.Property
 import com.jogigo.advertisementapp.databinding.FragmentFavouriteBinding
 import com.jogigo.advertisementapp.features.adapters.FavouriteAdapter
 import com.jogigo.advertisementapp.features.adapters.FavouriteListener
-import com.jogigo.advertisementapp.features.ui.activities.DetailActivity
+import com.jogigo.advertisementapp.features.ui.screens.detail.DetailActivity
 import com.jogigo.advertisementapp.utils.AppPreferences
 
 class FavouriteFragment : Fragment() {
@@ -58,7 +58,8 @@ class FavouriteFragment : Fragment() {
                         override fun onClick(property: Property) {
                             DetailActivity.open(requireContext())
                         }
-                    }
+                    },
+                    AppPreferences(requireContext()),
                 )
 
                 binding.favourites.adapter = favouriteAdapter
