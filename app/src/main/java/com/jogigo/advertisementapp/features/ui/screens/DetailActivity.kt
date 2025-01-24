@@ -63,7 +63,8 @@ class DetailActivity : AppCompatActivity() {
 
                 val sliderIndicator: TabLayout = findViewById(R.id.sliderIndicator)
                 TabLayoutMediator(sliderIndicator, imageSlider) { _, _ -> }.attach()
-                val characteristicsList = mapCharacteristics(detail.moreCharacteristics.toMap())
+                val characteristicsList =
+                    mapCharacteristics( detail.moreCharacteristics.toMap())
                 characteristicsAdapter.submitList(characteristicsList)
                 binding.viewInMapButton.setOnClickListener {
                     val latitude = detail.ubication.latitude
@@ -97,10 +98,8 @@ class DetailActivity : AppCompatActivity() {
             .setCancelable(true)
             .show()
     }
-
-
     @SuppressLint("StringFormatMatches")
-    private fun mapCharacteristics(moreCharacteristics: Map<String, Any?>?): List<Characteristic> {
+    fun mapCharacteristics(moreCharacteristics: Map<String, Any?>?): List<Characteristic> {
         if (moreCharacteristics == null) return emptyList()
 
         return listOf(
@@ -190,7 +189,6 @@ class DetailActivity : AppCompatActivity() {
             )
         )
     }
-
 }
 
 

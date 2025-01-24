@@ -42,22 +42,28 @@ android {
 }
 
 dependencies {
-
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
     implementation(libs.androidx.activity)
     implementation(libs.androidx.constraintlayout)
-    testImplementation(libs.junit)
     implementation(libs.androidx.fragment.ktx)
     implementation(libs.androidx.lifecycle.viewmodel.ktx)
-    androidTestImplementation(libs.androidx.junit)
-    androidTestImplementation(libs.androidx.espresso.core)
     implementation (libs.github.glide)
+    implementation(libs.androidx.junit.ktx)
     ksp (libs.compiler)
     implementation (libs.converter.gson)
     implementation (libs.retrofit)
     implementation (libs.androidx.room.ktx)
     implementation (libs.androidx.room.runtime)
     ksp (libs.androidx.room.compiler)
+    testImplementation (libs.mockk.mockk)
+    testImplementation (libs.junit)
+    testImplementation (libs.mockito.core)
+    androidTestImplementation (libs.androidx.junit.v115)
+    androidTestImplementation (libs.androidx.espresso.core.v351)
+    testImplementation (libs.androidx.core.testing)
+    testImplementation (libs.kotlinx.coroutines.test)
+    testImplementation (libs.androidx.core.testing.v210)
+    testImplementation (libs.mockito.inline)
 }

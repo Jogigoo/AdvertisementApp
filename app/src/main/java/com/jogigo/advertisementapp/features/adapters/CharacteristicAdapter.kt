@@ -27,19 +27,17 @@ class CharacteristicsAdapter : ListAdapter<Characteristic, CharacteristicsAdapte
     }
 
     override fun onBindViewHolder(holder: CharacteristicViewHolder, position: Int) {
-        holder.bind(getItem(position))  // Usamos getItem() para obtener el elemento
+        holder.bind(getItem(position))
     }
 
-    override fun getItemCount(): Int = currentList.size  // Usamos currentList
-
-    // Define un DiffCallback para optimizar las actualizaciones
+    override fun getItemCount(): Int = currentList.size
     class YourDiffCallback : DiffUtil.ItemCallback<Characteristic>() {
         override fun areItemsTheSame(oldItem: Characteristic, newItem: Characteristic): Boolean {
-            return oldItem == newItem  // Lógica de comparación para los ítems
+            return oldItem == newItem
         }
 
         override fun areContentsTheSame(oldItem: Characteristic, newItem: Characteristic): Boolean {
-            return oldItem == newItem  // Lógica de comparación del contenido
+            return oldItem == newItem
         }
     }
 }
