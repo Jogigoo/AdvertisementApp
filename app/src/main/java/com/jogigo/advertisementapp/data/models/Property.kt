@@ -60,3 +60,22 @@ data class Features(
     @SerializedName("hasTerrace") val hasTerrace: Boolean? = null,
     @SerializedName("hasGarden") val hasGarden: Boolean? = null
 )
+fun PropertyDetail.MoreCharacteristics.toMap(): Map<String, Any?> {
+    return mapOf(
+        "communityCosts" to communityCosts,
+        "roomNumber" to roomNumber,
+        "bathNumber" to bathNumber,
+        "exterior" to exterior,
+        "housingFurnitures" to housingFurnitures,
+        "agencyIsABank" to agencyIsABank,
+        "energyCertificationType" to energyCertificationType,
+        "flatLocation" to flatLocation,
+        "modificationDate" to modificationDate,
+        "constructedArea" to constructedArea,
+        "lift" to lift,
+        "boxroom" to boxroom,
+        "isDuplex" to isDuplex,
+        "floor" to floor,
+        "status" to status
+    )
+}

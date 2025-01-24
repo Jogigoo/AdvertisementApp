@@ -6,7 +6,9 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="24dp">
+        android:padding="16dp">
+
+        <!-- Back Arrow -->
         <ImageView
             android:id="@+id/backArrow"
             android:layout_width="32dp"
@@ -14,48 +16,112 @@
             android:contentDescription="@string/contentDescription_icon"
             android:foreground="?selectableItemBackground"
             android:src="@drawable/back"
-            android:layout_marginBottom="8dp"
-            android:stateListAnimator="@animator/btn_soft"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
+        <!-- Image Slider -->
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/imageSlider"
+            android:layout_width="0dp"
+            android:layout_height="200dp"
+            android:layout_marginTop="16dp"
+            android:background="@android:color/transparent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/backArrow" />
 
+        <!-- Page Indicator -->
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/sliderIndicator"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/imageSlider"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:tabIndicatorColor="@color/black"
+            android:background="@android:color/transparent"
+            app:tabIndicatorHeight="4dp" />
+
+        <!-- Property Details -->
         <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="16dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/backArrow">
-
+            app:layout_constraintTop_toBottomOf="@id/sliderIndicator">
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/main"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
 
-                <TextView
-                    android:id="@+id/propertyTitle"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-
+                <!-- Description -->
                 <TextView
                     android:id="@+id/propertyDescription"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginTop="8dp"
+                    android:textSize="16sp"
+                    android:textColor="@color/black"
+                    tools:text="Venta.Piso EN EXCLUSIVA. Castellana..."
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/propertyTitle" />
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <!-- Characteristics -->
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/propertyCharacteristics"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    tools:listitem="@layout/item_characteristic"
+                    app:layout_constraintTop_toBottomOf="@id/propertyDescription"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent" />
+
+                <!-- Price -->
+                <TextView
+                    android:id="@+id/propertyPrice"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:textSize="18sp"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
+                    tools:text="1.195.000 €"
+                    app:layout_constraintTop_toBottomOf="@id/propertyCharacteristics"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent" />
+
+                <!-- Action Button -->
+                <Button
+                    android:id="@+id/contactButton"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:text="@string/contact"
+                    android:backgroundTint="@color/black"
+                    android:textColor="@color/white"
+                    app:layout_constraintTop_toBottomOf="@id/propertyPrice"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent" />
+                <Button
+                    android:id="@+id/viewInMapButton"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:text="@string/see_location"
+                    android:backgroundTint="@color/black"
+                    android:textColor="@color/white"
+                    app:layout_constraintTop_toBottomOf="@id/contactButton"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent" />
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.core.widget.NestedScrollView>
 
-
+        <!-- Loading Indicator -->
         <include
             android:id="@+id/loading"
             layout="@layout/activity_loading"
